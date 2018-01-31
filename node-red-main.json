@@ -2,7 +2,9 @@
     {
         "id": "5b63af78.96e4f",
         "type": "tab",
-        "label": "Flow 1"
+        "label": "Flow 1",
+        "disabled": true,
+        "info": ""
     },
     {
         "id": "fd4ffe57.f6b16",
@@ -24,7 +26,17 @@
         "type": "subflow",
         "name": "SecondESP Switch settings",
         "info": "",
-        "in": [],
+        "in": [
+            {
+                "x": 100,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "c2f62c43.5ae0d"
+                    }
+                ]
+            }
+        ],
         "out": []
     },
     {
@@ -32,13 +44,58 @@
         "type": "subflow",
         "name": "BedESP Switch settings",
         "info": "",
-        "in": [],
+        "in": [
+            {
+                "x": 80,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "1347f3b4.678d2c"
+                    }
+                ]
+            }
+        ],
         "out": []
     },
     {
         "id": "d5b0d7ae.446838",
         "type": "subflow",
         "name": "Software switches and operating all switches",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "52a1b662.72b058",
+        "type": "subflow",
+        "name": "Delay on start",
+        "info": "",
+        "in": [],
+        "out": [
+            {
+                "x": 520,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "7821872e.248c88",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "439dc337.4fb9cc",
+        "type": "subflow",
+        "name": "Rename",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "78a7d496.dc3aec",
+        "type": "subflow",
+        "name": "Files Read",
         "info": "",
         "in": [],
         "out": []
@@ -180,7 +237,7 @@
         "id": "92f222b2.fda02",
         "type": "ui_group",
         "z": "",
-        "name": "Default",
+        "name": "Rename",
         "tab": "d90d7c81.48806",
         "order": 1,
         "disp": true,
@@ -308,16 +365,6 @@
         "name": "Second ESP",
         "tab": "6792355.6549bcc",
         "disp": false,
-        "width": "6"
-    },
-    {
-        "id": "2c2b89fc.1ed6f6",
-        "type": "ui_group",
-        "z": "7c4c545e.f0fb5c",
-        "name": "Rename",
-        "tab": "d90d7c81.48806",
-        "order": 2,
-        "disp": true,
         "width": "6"
     },
     {
@@ -1027,20 +1074,6 @@
         "wires": []
     },
     {
-        "id": "b78474eb.8f2648",
-        "type": "function",
-        "z": "fd4ffe57.f6b16",
-        "name": "Topics_Init & Names_Init & Switches_tables_Init",
-        "func": "var BedESP_lights_topics = [\"home/floor1/myroom/bed_esp/light01\", \"home/floor1/myroom/bed_esp/light02\", \"home/floor1/myroom/bed_esp/light03\",\"home/floor1/myroom/bed_esp/light04\"];\nvar SecondESP_lights_topics = [\"home/floor1/myroom/second_esp/light01\", \"home/floor1/myroom/second_esp/light02\", \"home/floor1/myroom/second_esp/light03\",\"home/floor1/myroom/second_esp/light04\"];\nvar BedESP_switches_topics = [\"home/floor1/myroom/bed_esp/switch01\", \"home/floor1/myroom/bed_esp/switch02\", \"home/floor1/myroom/bed_esp/switch03\",\"home/floor1/myroom/bed_esp/switch04\"];\nvar SecondESP_switches_topics = [\"home/floor1/myroom/second_esp/switch01\", \"home/floor1/myroom/second_esp/switch02\", \"home/floor1/myroom/second_esp/switch03\",\"home/floor1/myroom/second_esp/switch04\"];\n \nglobal.set(\"BedESP_lights_topics\", BedESP_lights_topics);\nglobal.set(\"SecondESP_lights_topics\", SecondESP_lights_topics);\nglobal.set(\"BedESP_switches_topics\", BedESP_switches_topics);\nglobal.set(\"SecondESP_switches_topics\", SecondESP_switches_topics);\n\nvar BedESP_switches = [];\nvar SecondESP_switches = [];\n\n/*\nfor (var i = 0; i < 4; i++) {\n    BedESP_switches[i] = [];\n    SecondESP_switches[i] = [];\n    BedESP_switches[i][0] = BedESP_lights_topics[i];\n    SecondESP_switches[i][0] = SecondESP_lights_topics[i];\n    for (var j = 1; j < 4; j++) {\n        BedESP_switches[i][j] = \"\";\n        SecondESP_switches[i][j] = \"\";\n    }\n}\n*/\n\n/*\nglobal.set(\"BedESP_switches\", BedESP_switches);\nglobal.set(\"SecondESP_switches\", SecondESP_switches);\n*/\n\n/*\n// names of esps\nglobal.set(\"bed_esp_name\", \"ESP01\");\nglobal.set(\"second_esp_name\", \"ESP02\");\n*/\n\n/*\nvar default_switches = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]];\nglobal.set(\"BedESP_switches\", default_switches);\nglobal.set(\"SecondESP_switches\", default_switches);\n*/\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 420,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "3719b352.579ebc",
         "type": "ui_dropdown",
         "z": "c687a720.430418",
@@ -1061,85 +1094,11 @@
         ],
         "payload": "",
         "topic": "0",
-        "x": 590,
-        "y": 260,
+        "x": 670,
+        "y": 40,
         "wires": [
             [
                 "174b746d.3e6d5c"
-            ]
-        ]
-    },
-    {
-        "id": "b4000d9a.d9f5d",
-        "type": "function",
-        "z": "c687a720.430418",
-        "name": "creates options for dropdown",
-        "func": "// msg.payload = global.get(\"BedESP_lights_topics\").length;\nvar BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\nvar options = [];\nvar i = '1';\n\n/*\nfor (var j = 0; j < BedESP_topics.length; j++) {\n    var choice = {\"label\": \"BedESP Lihgt #\" + i, \"value\": BedESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n\ni = '1';\nfor (var j = 0; j < SecondESP_topics.length; j++) {\n    var Label = \"Second Lihgt #\" + i;\n    var choice = {Label: SecondESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n*/\n\n/*\noptions.push({\"None\": \"\"});\noptions.push({\"BedESP Light #2\": BedESP_topics[0]});\noptions.push({\"BedESP Light #2\": BedESP_topics[1]});\noptions.push({\"BedESP Light #3\": BedESP_topics[2]});\noptions.push({\"BedESP Light #4\": BedESP_topics[3]});\noptions.push({\"SecondESP Light #1\": SecondESP_topics[0]});\noptions.push({\"SecondESP Light #2\": SecondESP_topics[1]});\noptions.push({\"SecondESP Light #3\": SecondESP_topics[2]});\noptions.push({\"SecondESP Light #4\": SecondESP_topics[3]});\n*/\n\n\nvar option = \"\";\n/*\nvar bed_esp_name = global.get(bed_esp_name);\nfor (var i = 0; i < 4; i++) {\n    option = \"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \": \";\n    option += BedESP_topics[i +1];\n    options.push(JSON.parse(option));\n}\n*/\n\nvar second_esp_name = global.get(second_esp_name);\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \";\n    option += SecondESP_topics[i];\n    option += \"}\";\n    options.push(JSON.parse(option));\n}\n\n\nmsg.options = options;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 320,
-        "y": 280,
-        "wires": [
-            [
-                "3719b352.579ebc",
-                "7cc53389.375d2c",
-                "b3d5a7d5.a01f48",
-                "29933f63.32a23",
-                "86211bea.79fd78",
-                "e056fb82.cb01d8",
-                "98ccd687.fb7af8",
-                "123865c8.165fba",
-                "86a045b9.0aef48",
-                "a0e22e70.ad8e3",
-                "c1844a2e.f30448",
-                "ef70d363.c540b",
-                "eefef33f.1e075",
-                "8d2fd04a.0b81c",
-                "ce3f9b05.cb5638",
-                "ca64e6fb.b07a98",
-                "67dbf090.38a33"
-            ]
-        ]
-    },
-    {
-        "id": "7425b68c.58b2d8",
-        "type": "inject",
-        "z": "fd4ffe57.f6b16",
-        "name": "start",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "x": 110,
-        "y": 320,
-        "wires": [
-            [
-                "b78474eb.8f2648",
-                "12e6be0f.3bda32",
-                "5a96ae2f.4513d",
-                "257eae62.80df22",
-                "15cb9ef1.2a6301"
-            ]
-        ]
-    },
-    {
-        "id": "35faef21.d0232",
-        "type": "inject",
-        "z": "c687a720.430418",
-        "name": "start",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "x": 110,
-        "y": 280,
-        "wires": [
-            [
-                "b4000d9a.d9f5d"
             ]
         ]
     },
@@ -1164,8 +1123,8 @@
         ],
         "payload": "",
         "topic": "1",
-        "x": 590,
-        "y": 320,
+        "x": 670,
+        "y": 100,
         "wires": [
             [
                 "174b746d.3e6d5c"
@@ -1193,8 +1152,8 @@
         ],
         "payload": "",
         "topic": "2",
-        "x": 590,
-        "y": 380,
+        "x": 670,
+        "y": 160,
         "wires": [
             [
                 "174b746d.3e6d5c"
@@ -1222,8 +1181,8 @@
         ],
         "payload": "",
         "topic": "3",
-        "x": 590,
-        "y": 440,
+        "x": 670,
+        "y": 220,
         "wires": [
             [
                 "174b746d.3e6d5c"
@@ -1238,8 +1197,8 @@
         "func": "var new_table = global.get(\"BedESP_switches\");\nvar set_idx = parseInt(msg.topic);\nnew_table[0][set_idx] = msg.payload;\nglobal.set(\"BedESP_switches\", new_table);\nmsg.payload = new_table;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
-        "y": 340,
+        "x": 920,
+        "y": 120,
         "wires": [
             [
                 "af10f848.fc0508"
@@ -1267,8 +1226,8 @@
         ],
         "payload": "",
         "topic": "0",
-        "x": 590,
-        "y": 520,
+        "x": 670,
+        "y": 300,
         "wires": [
             [
                 "d26f93.b28fa07"
@@ -1296,8 +1255,8 @@
         ],
         "payload": "",
         "topic": "1",
-        "x": 590,
-        "y": 580,
+        "x": 670,
+        "y": 360,
         "wires": [
             [
                 "d26f93.b28fa07"
@@ -1325,8 +1284,8 @@
         ],
         "payload": "",
         "topic": "2",
-        "x": 590,
-        "y": 640,
+        "x": 670,
+        "y": 420,
         "wires": [
             [
                 "d26f93.b28fa07"
@@ -1354,8 +1313,8 @@
         ],
         "payload": "",
         "topic": "3",
-        "x": 590,
-        "y": 700,
+        "x": 670,
+        "y": 480,
         "wires": [
             [
                 "d26f93.b28fa07"
@@ -1370,8 +1329,8 @@
         "func": "var new_table = global.get(\"BedESP_switches\");\nvar set_idx = parseInt(msg.topic);\nnew_table[1][set_idx] = msg.payload;\nglobal.set(\"BedESP_switches\", new_table);\nmsg.payload = new_table;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
-        "y": 600,
+        "x": 920,
+        "y": 380,
         "wires": [
             [
                 "af10f848.fc0508"
@@ -1399,8 +1358,8 @@
         ],
         "payload": "",
         "topic": "0",
-        "x": 590,
-        "y": 780,
+        "x": 670,
+        "y": 560,
         "wires": [
             [
                 "c0353d22.48d52"
@@ -1428,8 +1387,8 @@
         ],
         "payload": "",
         "topic": "1",
-        "x": 590,
-        "y": 840,
+        "x": 670,
+        "y": 620,
         "wires": [
             [
                 "c0353d22.48d52"
@@ -1457,8 +1416,8 @@
         ],
         "payload": "",
         "topic": "2",
-        "x": 590,
-        "y": 900,
+        "x": 670,
+        "y": 680,
         "wires": [
             [
                 "c0353d22.48d52"
@@ -1486,8 +1445,8 @@
         ],
         "payload": "",
         "topic": "3",
-        "x": 590,
-        "y": 960,
+        "x": 670,
+        "y": 740,
         "wires": [
             [
                 "c0353d22.48d52"
@@ -1502,8 +1461,8 @@
         "func": "var new_table = global.get(\"BedESP_switches\");\nvar set_idx = parseInt(msg.topic);\nnew_table[2][set_idx] = msg.payload;\nglobal.set(\"BedESP_switches\", new_table);\nmsg.payload = new_table;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
-        "y": 860,
+        "x": 920,
+        "y": 640,
         "wires": [
             [
                 "af10f848.fc0508"
@@ -1531,8 +1490,8 @@
         ],
         "payload": "",
         "topic": "0",
-        "x": 590,
-        "y": 1040,
+        "x": 670,
+        "y": 820,
         "wires": [
             [
                 "da5abfcc.e4c83"
@@ -1560,8 +1519,8 @@
         ],
         "payload": "",
         "topic": "1",
-        "x": 590,
-        "y": 1100,
+        "x": 670,
+        "y": 880,
         "wires": [
             [
                 "da5abfcc.e4c83"
@@ -1589,8 +1548,8 @@
         ],
         "payload": "",
         "topic": "2",
-        "x": 590,
-        "y": 1160,
+        "x": 670,
+        "y": 940,
         "wires": [
             [
                 "da5abfcc.e4c83"
@@ -1618,8 +1577,8 @@
         ],
         "payload": "",
         "topic": "3",
-        "x": 590,
-        "y": 1220,
+        "x": 670,
+        "y": 1000,
         "wires": [
             [
                 "da5abfcc.e4c83"
@@ -1634,61 +1593,11 @@
         "func": "var new_table = global.get(\"BedESP_switches\");\nvar set_idx = parseInt(msg.topic);\nnew_table[3][set_idx] = msg.payload;\nglobal.set(\"BedESP_switches\", new_table);\nmsg.payload = new_table;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 840,
-        "y": 1120,
+        "x": 920,
+        "y": 900,
         "wires": [
             [
                 "af10f848.fc0508"
-            ]
-        ]
-    },
-    {
-        "id": "be87a145.6ae48",
-        "type": "inject",
-        "z": "7c4c545e.f0fb5c",
-        "name": "start",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "x": 130,
-        "y": 100,
-        "wires": [
-            [
-                "a6aa9a90.d1bc48"
-            ]
-        ]
-    },
-    {
-        "id": "a6aa9a90.d1bc48",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "creates options for dropdown",
-        "func": "var BedESP_topics = [];\n// msg.payload = global.get(\"BedESP_lights_topics\").length;\nBedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\nvar options = [];\nvar i = '1';\n\n/*\nfor (var j = 0; j < BedESP_topics.length; j++) {\n    var choice = {\"label\": \"BedESP Lihgt #\" + i, \"value\": BedESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n\ni = '1';\nfor (var j = 0; j < SecondESP_topics.length; j++) {\n    var Label = \"Second Lihgt #\" + i;\n    var choice = {Label: SecondESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n*/\n\noptions.push({\"None\": \"\"});\noptions.push({\"BedESP Light #1\": BedESP_topics[0]});\noptions.push({\"BedESP Light #2\": BedESP_topics[1]});\noptions.push({\"BedESP Light #3\": BedESP_topics[2]});\noptions.push({\"BedESP Light #4\": BedESP_topics[3]});\noptions.push({\"SecondESP Light #1\": SecondESP_topics[0]});\noptions.push({\"SecondESP Light #2\": SecondESP_topics[1]});\noptions.push({\"SecondESP Light #3\": SecondESP_topics[2]});\noptions.push({\"SecondESP Light #4\": SecondESP_topics[3]});\n\nmsg.options = options;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 320,
-        "y": 100,
-        "wires": [
-            [
-                "2172e28b.77666e",
-                "99328e4f.0e423",
-                "af8186ae.309e08",
-                "9d4ef532.85ebe8",
-                "f7078d79.8838e",
-                "d8da8d09.ef4e4",
-                "6365c703.67e948",
-                "86b339fd.3e3bc8",
-                "edc64e4d.5a16c",
-                "47c711bb.bfb64",
-                "9cad8088.e6f8d",
-                "9c9c388.f1549c8",
-                "14374d67.a9c4a3",
-                "486fb07b.94232",
-                "a2b09ede.706ab",
-                "6e253f4b.3bd6"
             ]
         ]
     },
@@ -2221,15 +2130,6 @@
         ]
     },
     {
-        "id": "fef5fe24.a0356",
-        "type": "subflow:7c4c545e.f0fb5c",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "x": 180,
-        "y": 420,
-        "wires": []
-    },
-    {
         "id": "ed73628f.c37bf",
         "type": "mqtt in",
         "z": "d5b0d7ae.446838",
@@ -2314,15 +2214,6 @@
                 "fc3fdee0.93ae1"
             ]
         ]
-    },
-    {
-        "id": "26b0c1ec.4644ce",
-        "type": "subflow:c687a720.430418",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "x": 160,
-        "y": 380,
-        "wires": []
     },
     {
         "id": "f4db2a7b.c9b478",
@@ -2456,7 +2347,7 @@
         "qos": "2",
         "broker": "3cdd51b5.a678ee",
         "x": 200,
-        "y": 420,
+        "y": 480,
         "wires": [
             [
                 "e2a4a0c.d24216"
@@ -2481,7 +2372,7 @@
         "payloadType": "str",
         "topic": "home/floor1/myroom/second_esp/switch01",
         "x": 440,
-        "y": 420,
+        "y": 480,
         "wires": [
             [
                 "7d98ce89.e2214"
@@ -2497,7 +2388,7 @@
         "qos": "2",
         "broker": "3cdd51b5.a678ee",
         "x": 200,
-        "y": 480,
+        "y": 540,
         "wires": [
             [
                 "9af190e5.d830b"
@@ -2522,7 +2413,7 @@
         "payloadType": "str",
         "topic": "home/floor1/myroom/second_esp/switch02",
         "x": 440,
-        "y": 480,
+        "y": 540,
         "wires": [
             [
                 "7d98ce89.e2214"
@@ -2538,7 +2429,7 @@
         "qos": "2",
         "broker": "3cdd51b5.a678ee",
         "x": 200,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "943d4caa.95fc8"
@@ -2563,7 +2454,7 @@
         "payloadType": "str",
         "topic": "home/floor1/myroom/second_esp/switch03",
         "x": 440,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "7d98ce89.e2214"
@@ -2579,7 +2470,7 @@
         "qos": "2",
         "broker": "3cdd51b5.a678ee",
         "x": 200,
-        "y": 600,
+        "y": 660,
         "wires": [
             [
                 "fa02e9e2.0c6de8"
@@ -2604,7 +2495,7 @@
         "payloadType": "str",
         "topic": "home/floor1/myroom/second_esp/switch04",
         "x": 440,
-        "y": 600,
+        "y": 660,
         "wires": [
             [
                 "7d98ce89.e2214"
@@ -2616,8 +2507,8 @@
         "type": "subflow:d5b0d7ae.446838",
         "z": "fd4ffe57.f6b16",
         "name": "",
-        "x": 230,
-        "y": 500,
+        "x": 210,
+        "y": 360,
         "wires": []
     },
     {
@@ -2648,114 +2539,6 @@
         "x": 880,
         "y": 460,
         "wires": []
-    },
-    {
-        "id": "5a96ae2f.4513d",
-        "type": "ui_button",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "group": "6e0daf09.fde95",
-        "order": 2,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "label": "Off",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 90,
-        "y": 180,
-        "wires": [
-            [
-                "1af124d3.9fba0b"
-            ]
-        ]
-    },
-    {
-        "id": "120a8de4.502c32",
-        "type": "mqtt out",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "broker": "3cdd51b5.a678ee",
-        "x": 470,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "1af124d3.9fba0b",
-        "type": "function",
-        "z": "fd4ffe57.f6b16",
-        "name": "BedESP all lights off",
-        "func": "var BedESP_lights = global.get(\"BedESP_lights_topics\");\nvar outputMsgs = [];\nfor (var i in BedESP_lights) {\n    outputMsgs.push({payload: 0, topic: BedESP_lights[i]});\n}\nreturn [ outputMsgs ];",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 290,
-        "y": 180,
-        "wires": [
-            [
-                "120a8de4.502c32"
-            ]
-        ]
-    },
-    {
-        "id": "12e6be0f.3bda32",
-        "type": "ui_button",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "group": "384567f9.832db8",
-        "order": 2,
-        "width": "1",
-        "height": "1",
-        "passthru": false,
-        "label": "Off",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "",
-        "x": 90,
-        "y": 240,
-        "wires": [
-            [
-                "23ade6f8.7d594a"
-            ]
-        ]
-    },
-    {
-        "id": "ba85db35.35f098",
-        "type": "mqtt out",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "broker": "3cdd51b5.a678ee",
-        "x": 470,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "23ade6f8.7d594a",
-        "type": "function",
-        "z": "fd4ffe57.f6b16",
-        "name": "BedESP all lights off",
-        "func": "var SecondESP_lights = global.get(\"SecondESP_lights_topics\");\nvar outputMsgs = [];\nfor (var i in SecondESP_lights) {\n    outputMsgs.push({payload: 0, topic: SecondESP_lights[i]});\n}\nreturn [ outputMsgs ];",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 290,
-        "y": 240,
-        "wires": [
-            [
-                "ba85db35.35f098"
-            ]
-        ]
     },
     {
         "id": "84d04823.26f628",
@@ -2797,7 +2580,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "5",
+        "repeat": "2",
         "crontab": "",
         "once": true,
         "x": 110,
@@ -2821,7 +2604,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-left",
         "x": 550,
-        "y": 380,
+        "y": 440,
         "wires": []
     },
     {
@@ -2833,7 +2616,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 380,
+        "y": 440,
         "wires": [
             [
                 "aaaceebd.1b466"
@@ -2848,11 +2631,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "5",
+        "repeat": "2",
         "crontab": "",
         "once": true,
         "x": 110,
-        "y": 380,
+        "y": 440,
         "wires": [
             [
                 "62f2da82.0832c4"
@@ -2962,496 +2745,19 @@
         "wires": []
     },
     {
-        "id": "9ac2283e.1f3278",
-        "type": "ui_text_input",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "label": "{{msg.payload}}",
-        "group": "2c2b89fc.1ed6f6",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "mode": "text",
-        "delay": "0",
-        "topic": "",
-        "x": 540,
-        "y": 1100,
-        "wires": [
-            [
-                "878b3865.f10588"
-            ]
-        ]
-    },
-    {
-        "id": "23a997a0.d729b8",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "gets second_esp_name to payload",
-        "func": "msg.payload = global.get(\"second_esp_name\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 360,
-        "y": 1340,
-        "wires": [
-            [
-                "b05eb4b5.a96618"
-            ]
-        ]
-    },
-    {
-        "id": "e77c59a1.0ef0b8",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "gets bed_esp_name to payload",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 330,
-        "y": 1100,
-        "wires": [
-            [
-                "9ac2283e.1f3278"
-            ]
-        ]
-    },
-    {
-        "id": "eae1c3f5.0a77a",
-        "type": "inject",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "x": 110,
-        "y": 1100,
-        "wires": [
-            [
-                "e77c59a1.0ef0b8",
-                "4b00be26.72676",
-                "ffdec13f.90f79",
-                "38191448.7d46dc",
-                "48be5bd6.85b204"
-            ]
-        ]
-    },
-    {
-        "id": "b05eb4b5.a96618",
-        "type": "ui_text_input",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "label": "{{msg.payload}}",
-        "group": "2c2b89fc.1ed6f6",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "mode": "text",
-        "delay": "0",
-        "topic": "",
-        "x": 580,
-        "y": 1340,
-        "wires": [
-            [
-                "2611c968.fdaa46"
-            ]
-        ]
-    },
-    {
-        "id": "878b3865.f10588",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "gets payload to global bed_esp_name",
-        "func": "global.set(\"bed_esp_name\", msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 770,
-        "y": 1100,
-        "wires": [
-            [
-                "a6947b49.4790f8",
-                "4b00be26.72676",
-                "ffdec13f.90f79",
-                "38191448.7d46dc",
-                "48be5bd6.85b204"
-            ]
-        ]
-    },
-    {
-        "id": "2611c968.fdaa46",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "gets payload to global second_esp_name",
-        "func": "global.set(\"second_esp_name\", msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 820,
-        "y": 1340,
-        "wires": [
-            [
-                "8a8b2d68.71e7f",
-                "ec8926f8.4a6018",
-                "449aec63.3a0664",
-                "2c115345.5eaf4c",
-                "13bd34d6.2cec5b"
-            ]
-        ]
-    },
-    {
-        "id": "99a788ec.414298",
-        "type": "link in",
-        "z": "7c4c545e.f0fb5c",
-        "name": "second_esp_name change start",
-        "links": [
-            "8a8b2d68.71e7f"
-        ],
-        "x": 155,
-        "y": 1280,
-        "wires": [
-            [
-                "23a997a0.d729b8"
-            ]
-        ]
-    },
-    {
-        "id": "9d48c21.173844",
-        "type": "link in",
-        "z": "7c4c545e.f0fb5c",
-        "name": "bed_esp_name change start",
-        "links": [
-            "a6947b49.4790f8"
-        ],
-        "x": 155,
-        "y": 1040,
-        "wires": [
-            [
-                "e77c59a1.0ef0b8"
-            ]
-        ]
-    },
-    {
-        "id": "a6947b49.4790f8",
-        "type": "link out",
-        "z": "7c4c545e.f0fb5c",
-        "name": "bed_esp_name change end",
-        "links": [
-            "9d48c21.173844",
-            "5da77de0.3b6674"
-        ],
-        "x": 955,
-        "y": 1100,
-        "wires": []
-    },
-    {
-        "id": "8a8b2d68.71e7f",
-        "type": "link out",
-        "z": "7c4c545e.f0fb5c",
-        "name": "second_esp_name change end",
-        "links": [
-            "99a788ec.414298",
-            "d0ed3e52.70a0e"
-        ],
-        "x": 1015,
-        "y": 1340,
-        "wires": []
-    },
-    {
-        "id": "b439f700.1419d8",
-        "type": "inject",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "x": 110,
-        "y": 1340,
-        "wires": [
-            [
-                "23a997a0.d729b8",
-                "ec8926f8.4a6018",
-                "449aec63.3a0664",
-                "2c115345.5eaf4c",
-                "13bd34d6.2cec5b"
-            ]
-        ]
-    },
-    {
-        "id": "41e28b0d.b1a284",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "718ab4f3.f0ce9c",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1210,
-        "y": 1420,
-        "wires": []
-    },
-    {
-        "id": "ec8926f8.4a6018",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #1\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1060,
-        "y": 1420,
-        "wires": [
-            [
-                "41e28b0d.b1a284"
-            ]
-        ]
-    },
-    {
-        "id": "b2e99d3d.a3574",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "b611308e.64873",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1210,
-        "y": 1460,
-        "wires": []
-    },
-    {
-        "id": "449aec63.3a0664",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #2\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1060,
-        "y": 1460,
-        "wires": [
-            [
-                "b2e99d3d.a3574"
-            ]
-        ]
-    },
-    {
-        "id": "d5c1629d.1232c",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "e52b04c4.b639b8",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1210,
-        "y": 1500,
-        "wires": []
-    },
-    {
-        "id": "2c115345.5eaf4c",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #3\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1060,
-        "y": 1500,
-        "wires": [
-            [
-                "d5c1629d.1232c"
-            ]
-        ]
-    },
-    {
-        "id": "971e4d7c.ebc88",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "a90e9854.3fd488",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1210,
-        "y": 1540,
-        "wires": []
-    },
-    {
-        "id": "13bd34d6.2cec5b",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #4\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1060,
-        "y": 1540,
-        "wires": [
-            [
-                "971e4d7c.ebc88"
-            ]
-        ]
-    },
-    {
-        "id": "969c9041.40b94",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "ef61f07.0ceb51",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1170,
-        "y": 1140,
-        "wires": []
-    },
-    {
-        "id": "4b00be26.72676",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #1\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1020,
-        "y": 1140,
-        "wires": [
-            [
-                "969c9041.40b94"
-            ]
-        ]
-    },
-    {
-        "id": "aa27b42c.ef2e38",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "9df32708.438318",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1170,
-        "y": 1180,
-        "wires": []
-    },
-    {
-        "id": "ffdec13f.90f79",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #2\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1020,
-        "y": 1180,
-        "wires": [
-            [
-                "aa27b42c.ef2e38"
-            ]
-        ]
-    },
-    {
-        "id": "a1e0bd6d.aa2d5",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "162f6e28.4075d2",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1170,
-        "y": 1220,
-        "wires": []
-    },
-    {
-        "id": "38191448.7d46dc",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #3\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1020,
-        "y": 1220,
-        "wires": [
-            [
-                "a1e0bd6d.aa2d5"
-            ]
-        ]
-    },
-    {
-        "id": "8c8839e6.8b5358",
-        "type": "ui_text",
-        "z": "7c4c545e.f0fb5c",
-        "group": "2c04a7be.807208",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "x": 1170,
-        "y": 1260,
-        "wires": []
-    },
-    {
-        "id": "48be5bd6.85b204",
-        "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #4\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1020,
-        "y": 1260,
-        "wires": [
-            [
-                "8c8839e6.8b5358"
-            ]
-        ]
-    },
-    {
         "id": "3827431.c7720bc",
         "type": "file in",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "filename": "/home/pi/BedESP_switches",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 860,
-        "y": 440,
+        "x": 400,
+        "y": 280,
         "wires": [
             [
                 "3ef0a55b.43e14a",
-                "d7643e40.5357d",
                 "1421dfe3.d375b"
             ]
         ]
@@ -3459,7 +2765,7 @@
     {
         "id": "257eae62.80df22",
         "type": "delay",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "pauseType": "delay",
         "timeout": "5",
@@ -3471,8 +2777,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 580,
-        "y": 520,
+        "x": 120,
+        "y": 360,
         "wires": [
             [
                 "928f040a.64cec8"
@@ -3482,13 +2788,13 @@
     {
         "id": "15cb9ef1.2a6301",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "first_init = 0",
         "func": "global.set(\"first_init\", 0);\nmsg.payload = 0;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 590,
-        "y": 480,
+        "x": 130,
+        "y": 320,
         "wires": [
             [
                 "3827431.c7720bc",
@@ -3501,13 +2807,13 @@
     {
         "id": "1421dfe3.d375b",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "first_init = 1",
         "func": "msg.payload = global.set(\"first_init\", 1);\nmsg.payload = 1;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1070,
-        "y": 480,
+        "x": 610,
+        "y": 320,
         "wires": [
             []
         ]
@@ -3515,32 +2821,31 @@
     {
         "id": "928f040a.64cec8",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "if (first_init ==0) return;",
         "func": "msg.payload = global.get(\"first_init\");\nif (msg.payload === 0)\n    return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 760,
-        "y": 520,
+        "x": 300,
+        "y": 360,
         "wires": [
             [
                 "90d9203.76c28e",
                 "d898131c.14378",
-                "ebd63f94.acf21",
-                "fd5bb701.82c1d8"
+                "ebd63f94.acf21"
             ]
         ]
     },
     {
         "id": "90d9203.76c28e",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "Switches_table_init",
         "func": "BedESP_lights_topics = global.get(\"BedESP_lights_topics\");\nSecondESP_lights_topics = global.get(\"SecondESP_lights_topics\");\n\nvar BedESP_switches = [];\nvar SecondESP_switches = [];\n\nfor (var i = 0; i < 4; i++) {\n    BedESP_switches[i] = [];\n    SecondESP_switches[i] = [];\n    BedESP_switches[i][0] = BedESP_lights_topics[i];\n    SecondESP_switches[i][0] = SecondESP_lights_topics[i];\n    for (var j = 1; j < 4; j++) {\n        BedESP_switches[i][j] = \"\";\n        SecondESP_switches[i][j] = \"\";\n    }\n}\n\nglobal.set(\"BedESP_switches\", BedESP_switches);\nglobal.set(\"SecondESP_switches\", SecondESP_switches);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 990,
-        "y": 520,
+        "x": 530,
+        "y": 360,
         "wires": [
             [
                 "1fe77f08.c241d1",
@@ -3551,60 +2856,58 @@
     {
         "id": "3947ec0e.c9a2c4",
         "type": "file",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "filename": "",
         "appendNewline": false,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 1450,
-        "y": 580,
+        "x": 990,
+        "y": 420,
         "wires": []
     },
     {
         "id": "1fe77f08.c241d1",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "payload == esp01_table",
         "func": "msg.payload = global.get(\"BedESP_switches\");\nmsg.filename = \"BedESP_switches\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1230,
-        "y": 520,
+        "x": 770,
+        "y": 360,
         "wires": [
             [
-                "3947ec0e.c9a2c4",
-                "b428b7a8.97b2d8"
+                "3947ec0e.c9a2c4"
             ]
         ]
     },
     {
         "id": "1e24facf.30f9a5",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "payload = esp_02_table",
         "func": "msg.payload = global.get(\"SecondESP_switches\");\nmsg.filename = \"SecondESP_switches\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1230,
-        "y": 560,
+        "x": 770,
+        "y": 400,
         "wires": [
             [
-                "3947ec0e.c9a2c4",
-                "b428b7a8.97b2d8"
+                "3947ec0e.c9a2c4"
             ]
         ]
     },
     {
         "id": "3ef0a55b.43e14a",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "global BedESP_switches = payload",
         "func": "var parts =  msg.payload.split(\"\\\"\");\nmsg.payload = [];\nfor (var i = 0; i < 4; i++) {\n    var sw = [];\n    for (var j = 0; j < 4; j++) {\n        sw.push(parts[1+(i*8)+(j*2)]);\n    }\n    msg.payload.push(sw);\n}\nglobal.set(\"BedESP_switches\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1200,
-        "y": 440,
+        "x": 740,
+        "y": 280,
         "wires": [
             []
         ]
@@ -3612,31 +2915,30 @@
     {
         "id": "612d674e.e3d998",
         "type": "file in",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "filename": "/home/pi/SecondESP_switches",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 870,
-        "y": 400,
+        "x": 410,
+        "y": 240,
         "wires": [
             [
-                "f12453ab.6705b",
-                "d7643e40.5357d"
+                "f12453ab.6705b"
             ]
         ]
     },
     {
         "id": "f12453ab.6705b",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "global SecondESP_switches = payload",
         "func": "var parts =  msg.payload.split(\"\\\"\");\nmsg.payload = [];\nfor (var i = 0; i < 4; i++) {\n    var sw = [];\n    for (var j = 0; j < 4; j++) {\n        sw.push(parts[1+(i*8)+(j*2)]);\n    }\n    msg.payload.push(sw);\n}\nglobal.set(\"SecondESP_switches\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1190,
-        "y": 400,
+        "x": 730,
+        "y": 240,
         "wires": [
             []
         ]
@@ -3650,20 +2952,20 @@
         "appendNewline": false,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 1330,
-        "y": 700,
+        "x": 1410,
+        "y": 480,
         "wires": []
     },
     {
         "id": "af10f848.fc0508",
         "type": "function",
         "z": "c687a720.430418",
-        "name": "payload == esp01_table",
+        "name": "payload = esp01_table",
         "func": "msg.payload = global.get(\"BedESP_switches\");\nmsg.filename = \"BedESP_switches\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1150,
-        "y": 700,
+        "x": 1200,
+        "y": 480,
         "wires": [
             [
                 "89685f71.f5521"
@@ -3700,101 +3002,81 @@
         ]
     },
     {
-        "id": "d0ed3e52.70a0e",
-        "type": "link in",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "links": [
-            "8a8b2d68.71e7f"
-        ],
-        "x": 135,
-        "y": 1440,
-        "wires": [
-            [
-                "b8f2fd45.7be1c"
-            ]
-        ]
-    },
-    {
         "id": "d898131c.14378",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "second_esp_name file set",
         "func": "global.set(\"second_esp_name\", \"ESP02\");\nmsg.payload = global.get(\"second_esp_name\");\nmsg.filename = \"second_esp_name\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1230,
-        "y": 660,
+        "x": 770,
+        "y": 500,
         "wires": [
             [
-                "3947ec0e.c9a2c4",
-                "b428b7a8.97b2d8"
+                "3947ec0e.c9a2c4"
             ]
         ]
     },
     {
         "id": "ebd63f94.acf21",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "bed_esp_name file set",
         "func": "global.set(\"bed_esp_name\", \"ESP01\");\nmsg.payload = global.get(\"bed_esp_name\");\nmsg.filename = \"bed_esp_name\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1240,
-        "y": 620,
+        "x": 780,
+        "y": 460,
         "wires": [
             [
-                "3947ec0e.c9a2c4",
-                "b428b7a8.97b2d8"
+                "3947ec0e.c9a2c4"
             ]
         ]
     },
     {
         "id": "c2fe96ac.db67e8",
         "type": "file in",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "filename": "/home/pi/bed_esp_name",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 850,
-        "y": 300,
+        "x": 390,
+        "y": 140,
         "wires": [
             [
-                "99dea0b7.24926",
-                "d7643e40.5357d"
+                "99dea0b7.24926"
             ]
         ]
     },
     {
         "id": "2e289e71.fdbd72",
         "type": "file in",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "",
         "filename": "/home/pi/second_esp_name",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
-        "x": 860,
-        "y": 340,
+        "x": 400,
+        "y": 180,
         "wires": [
             [
-                "e2e0d76b.a49078",
-                "d7643e40.5357d"
+                "e2e0d76b.a49078"
             ]
         ]
     },
     {
         "id": "e2e0d76b.a49078",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "global second_esp_name= payload",
         "func": "global.set(\"second_esp_name\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1160,
-        "y": 340,
+        "x": 700,
+        "y": 180,
         "wires": [
             []
         ]
@@ -3802,150 +3084,958 @@
     {
         "id": "99dea0b7.24926",
         "type": "function",
-        "z": "fd4ffe57.f6b16",
+        "z": "78a7d496.dc3aec",
         "name": "global bed_esp_name = payload",
         "func": "global.set(\"bed_esp_name\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1150,
-        "y": 300,
+        "x": 690,
+        "y": 140,
         "wires": [
             []
         ]
     },
     {
-        "id": "d7643e40.5357d",
-        "type": "debug",
-        "z": "fd4ffe57.f6b16",
+        "id": "1347f3b4.678d2c",
+        "type": "function",
+        "z": "c687a720.430418",
+        "name": "creates options for dropdown json",
+        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New BedESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "3719b352.579ebc",
+                "7cc53389.375d2c",
+                "b3d5a7d5.a01f48",
+                "86211bea.79fd78",
+                "e056fb82.cb01d8",
+                "98ccd687.fb7af8",
+                "123865c8.165fba",
+                "86a045b9.0aef48",
+                "a0e22e70.ad8e3",
+                "c1844a2e.f30448",
+                "ef70d363.c540b",
+                "eefef33f.1e075",
+                "8d2fd04a.0b81c",
+                "ce3f9b05.cb5638",
+                "ca64e6fb.b07a98",
+                "29933f63.32a23"
+            ]
+        ]
+    },
+    {
+        "id": "fd938e81.ce045",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "gets bed_esp_name to payload",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "b0dcb5b9.553658"
+            ]
+        ]
+    },
+    {
+        "id": "b0dcb5b9.553658",
+        "type": "ui_text_input",
+        "z": "439dc337.4fb9cc",
         "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 1130,
-        "y": 220,
+        "label": "{{msg.payload}}",
+        "group": "92f222b2.fda02",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 640,
+        "y": 120,
+        "wires": [
+            [
+                "48d03918.87bc78"
+            ]
+        ]
+    },
+    {
+        "id": "472d61ef.7c9b9",
+        "type": "link in",
+        "z": "439dc337.4fb9cc",
+        "name": "bed_esp_name change start",
+        "links": [
+            "2f8dfa6c.7b8026"
+        ],
+        "x": 255,
+        "y": 60,
+        "wires": [
+            [
+                "fd938e81.ce045"
+            ]
+        ]
+    },
+    {
+        "id": "48d03918.87bc78",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "gets payload to global bed_esp_name",
+        "func": "global.set(\"bed_esp_name\", msg.payload);\nnode.warn(\"BedESP renamed\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 870,
+        "y": 120,
+        "wires": [
+            [
+                "dc0e473e.c152d8",
+                "9c0695e8.48db78",
+                "a0cc3b55.811c78",
+                "59b9af0a.5b59a",
+                "2f8dfa6c.7b8026"
+            ]
+        ]
+    },
+    {
+        "id": "dc0e473e.c152d8",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #1\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 160,
+        "wires": [
+            [
+                "e0db468a.a754a8"
+            ]
+        ]
+    },
+    {
+        "id": "9c0695e8.48db78",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #2\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 200,
+        "wires": [
+            [
+                "46ba3fc5.d656d"
+            ]
+        ]
+    },
+    {
+        "id": "a0cc3b55.811c78",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #3\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 240,
+        "wires": [
+            [
+                "4569df3c.0524b"
+            ]
+        ]
+    },
+    {
+        "id": "59b9af0a.5b59a",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.payload += \" Switch #4\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 280,
+        "wires": [
+            [
+                "525b815.62eb08"
+            ]
+        ]
+    },
+    {
+        "id": "e0db468a.a754a8",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "ef61f07.0ceb51",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "1ed4ff19.b57bf1",
+        "id": "46ba3fc5.d656d",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "9df32708.438318",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4569df3c.0524b",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "162f6e28.4075d2",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "525b815.62eb08",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "2c04a7be.807208",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e61fd68.2342028",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "bed_esp_name file set",
+        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.filename = \"bed_esp_name\";\nnode.warn(\"bed esp name wrote to file\")\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "af3ad59e.c99f98"
+            ]
+        ]
+    },
+    {
+        "id": "2fe36c33.c38d74",
+        "type": "link in",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "links": [
+            "2f8dfa6c.7b8026"
+        ],
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "e61fd68.2342028"
+            ]
+        ]
+    },
+    {
+        "id": "af3ad59e.c99f98",
         "type": "file",
-        "z": "7c4c545e.f0fb5c",
+        "z": "439dc337.4fb9cc",
         "name": "",
         "filename": "",
         "appendNewline": false,
         "createDir": true,
         "overwriteFile": "true",
-        "x": 510,
-        "y": 1480,
+        "x": 610,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "b8f2fd45.7be1c",
+        "id": "c2f62c43.5ae0d",
         "type": "function",
         "z": "7c4c545e.f0fb5c",
+        "name": "creates options for dropdown json",
+        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New SecondESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "2172e28b.77666e",
+                "99328e4f.0e423",
+                "af8186ae.309e08",
+                "9d4ef532.85ebe8",
+                "f7078d79.8838e",
+                "d8da8d09.ef4e4",
+                "6365c703.67e948",
+                "86b339fd.3e3bc8",
+                "edc64e4d.5a16c",
+                "47c711bb.bfb64",
+                "9cad8088.e6f8d",
+                "9c9c388.f1549c8",
+                "14374d67.a9c4a3",
+                "486fb07b.94232",
+                "a2b09ede.706ab",
+                "6e253f4b.3bd6"
+            ]
+        ]
+    },
+    {
+        "id": "6c3ec361.96333c",
+        "type": "inject",
+        "z": "52a1b662.72b058",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "7821872e.248c88"
+            ]
+        ]
+    },
+    {
+        "id": "7821872e.248c88",
+        "type": "delay",
+        "z": "52a1b662.72b058",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 400,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9aa71b25.e0c7e8",
+        "type": "subflow:52a1b662.72b058",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "fd938e81.ce045",
+                "dc0e473e.c152d8",
+                "9c0695e8.48db78",
+                "a0cc3b55.811c78",
+                "59b9af0a.5b59a"
+            ]
+        ]
+    },
+    {
+        "id": "86aae512.eb6848",
+        "type": "subflow:439dc337.4fb9cc",
+        "z": "fd4ffe57.f6b16",
+        "name": "",
+        "x": 100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "967e9863.d1f938",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "gets second_esp_name to payload",
+        "func": "msg.payload = global.get(\"second_esp_name\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 420,
+        "wires": [
+            [
+                "7c48cf7e.72f7a"
+            ]
+        ]
+    },
+    {
+        "id": "7c48cf7e.72f7a",
+        "type": "ui_text_input",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "label": "{{msg.payload}}",
+        "group": "92f222b2.fda02",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 640,
+        "y": 420,
+        "wires": [
+            [
+                "bd78ce2c.50a37"
+            ]
+        ]
+    },
+    {
+        "id": "b08f5e73.6ccc7",
+        "type": "link in",
+        "z": "439dc337.4fb9cc",
+        "name": "second_esp_name change start",
+        "links": [
+            "db0ae314.6c4ff"
+        ],
+        "x": 215,
+        "y": 360,
+        "wires": [
+            [
+                "967e9863.d1f938"
+            ]
+        ]
+    },
+    {
+        "id": "842e54a7.59b948",
+        "type": "subflow:52a1b662.72b058",
+        "z": "439dc337.4fb9cc",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "967e9863.d1f938",
+                "310ea9f0.319896",
+                "7c4355fa.c19ebc",
+                "b79ec81.ed67138",
+                "505b507c.7cc62"
+            ]
+        ]
+    },
+    {
+        "id": "bd78ce2c.50a37",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "gets payload to global second_esp_name",
+        "func": "global.set(\"second_esp_name\", msg.payload);\nnode.warn(\"Second renamed\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 880,
+        "y": 420,
+        "wires": [
+            [
+                "db0ae314.6c4ff",
+                "310ea9f0.319896",
+                "7c4355fa.c19ebc",
+                "b79ec81.ed67138",
+                "505b507c.7cc62"
+            ]
+        ]
+    },
+    {
+        "id": "310ea9f0.319896",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #1\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 500,
+        "wires": [
+            [
+                "1be6cd30.842e73"
+            ]
+        ]
+    },
+    {
+        "id": "7c4355fa.c19ebc",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #2\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 540,
+        "wires": [
+            [
+                "210b52bc.af7bbe"
+            ]
+        ]
+    },
+    {
+        "id": "b79ec81.ed67138",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #3\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 580,
+        "wires": [
+            [
+                "46995983.d1beb8"
+            ]
+        ]
+    },
+    {
+        "id": "505b507c.7cc62",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.payload += \" Switch #4\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1120,
+        "y": 620,
+        "wires": [
+            [
+                "8fbcaa67.c298b8"
+            ]
+        ]
+    },
+    {
+        "id": "db0ae314.6c4ff",
+        "type": "link out",
+        "z": "439dc337.4fb9cc",
+        "name": "second_esp_name change end",
+        "links": [
+            "5d923c89.39c634",
+            "b08f5e73.6ccc7",
+            "f0d68b01.1b9678"
+        ],
+        "x": 1115,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1be6cd30.842e73",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "718ab4f3.f0ce9c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "210b52bc.af7bbe",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "b611308e.64873",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "46995983.d1beb8",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "e52b04c4.b639b8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "8fbcaa67.c298b8",
+        "type": "ui_text",
+        "z": "439dc337.4fb9cc",
+        "group": "a90e9854.3fd488",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 1270,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f0731ef7.afa07",
+        "type": "file",
+        "z": "439dc337.4fb9cc",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "x": 650,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "5894320b.3828fc",
+        "type": "function",
+        "z": "439dc337.4fb9cc",
         "name": "second_esp_name file set",
         "func": "msg.payload = global.get(\"second_esp_name\");\nmsg.filename = \"second_esp_name\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 310,
-        "y": 1460,
+        "x": 450,
+        "y": 560,
         "wires": [
             [
-                "1ed4ff19.b57bf1"
+                "f0731ef7.afa07"
             ]
         ]
     },
     {
-        "id": "5da77de0.3b6674",
+        "id": "f0d68b01.1b9678",
         "type": "link in",
-        "z": "7c4c545e.f0fb5c",
+        "z": "439dc337.4fb9cc",
         "name": "",
         "links": [
-            "a6947b49.4790f8"
+            "db0ae314.6c4ff"
         ],
-        "x": 180,
-        "y": 1160,
+        "x": 275,
+        "y": 540,
         "wires": [
             [
-                "91b41808.815178"
+                "5894320b.3828fc"
             ]
         ]
     },
     {
-        "id": "c95f25c9.911538",
-        "type": "file",
-        "z": "7c4c545e.f0fb5c",
-        "name": "",
-        "filename": "",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "x": 530,
-        "y": 1220,
+        "id": "2f8dfa6c.7b8026",
+        "type": "link out",
+        "z": "439dc337.4fb9cc",
+        "name": "bed_esp_name change end",
+        "links": [
+            "2fe36c33.c38d74",
+            "472d61ef.7c9b9",
+            "5d923c89.39c634"
+        ],
+        "x": 1140,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "91b41808.815178",
+        "id": "5d923c89.39c634",
+        "type": "link in",
+        "z": "439dc337.4fb9cc",
+        "name": "switches settings",
+        "links": [
+            "2f8dfa6c.7b8026",
+            "db0ae314.6c4ff"
+        ],
+        "x": 135,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6d1ed30.069c8",
         "type": "function",
-        "z": "7c4c545e.f0fb5c",
-        "name": "bed_esp_name file set",
-        "func": "msg.payload = global.get(\"bed_esp_name\");\nmsg.filename = \"bed_esp_name\";\nreturn msg;",
+        "z": "c687a720.430418",
+        "name": "creates options for dropdown",
+        "func": "var BedESP_topics = [];\n// msg.payload = global.get(\"BedESP_lights_topics\").length;\nBedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\nvar options = [];\nvar i = '1';\n\n/*\nfor (var j = 0; j < BedESP_topics.length; j++) {\n    var choice = {\"label\": \"BedESP Lihgt #\" + i, \"value\": BedESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n\ni = '1';\nfor (var j = 0; j < SecondESP_topics.length; j++) {\n    var Label = \"Second Lihgt #\" + i;\n    var choice = {Label: SecondESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n*/\n\noptions.push({\"None\": \"\"});\noptions.push({\"BedESP Light #1\": BedESP_topics[0]});\noptions.push({\"BedESP Light #2\": BedESP_topics[1]});\noptions.push({\"BedESP Light #3\": BedESP_topics[2]});\noptions.push({\"BedESP Light #4\": BedESP_topics[3]});\noptions.push({\"SecondESP Light #1\": SecondESP_topics[0]});\noptions.push({\"SecondESP Light #2\": SecondESP_topics[1]});\noptions.push({\"SecondESP Light #3\": SecondESP_topics[2]});\noptions.push({\"SecondESP Light #4\": SecondESP_topics[3]});\n\nmsg.options = options;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 340,
-        "y": 1180,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "133a98af.887077",
+        "type": "subflow:78a7d496.dc3aec",
+        "z": "fd4ffe57.f6b16",
+        "name": "",
+        "x": 100,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "359fb6b8.ff6bfa",
+        "type": "inject",
+        "z": "78a7d496.dc3aec",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 110,
+        "y": 240,
         "wires": [
             [
-                "c95f25c9.911538",
-                "794c0bf3.56f024"
+                "257eae62.80df22",
+                "15cb9ef1.2a6301",
+                "26a2ceaf.dfb662"
             ]
         ]
     },
     {
-        "id": "794c0bf3.56f024",
+        "id": "bd2fd613.839c38",
+        "type": "ui_button",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "group": "6e0daf09.fde95",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "Off",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 250,
+        "y": 60,
+        "wires": [
+            [
+                "3a4ea3bf.7ddbbc"
+            ]
+        ]
+    },
+    {
+        "id": "1b2c0514.26b96b",
+        "type": "mqtt out",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "3cdd51b5.a678ee",
+        "x": 590,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "3a4ea3bf.7ddbbc",
+        "type": "function",
+        "z": "d5b0d7ae.446838",
+        "name": "BedESP all lights off",
+        "func": "var BedESP_lights = global.get(\"BedESP_lights_topics\");\nvar outputMsgs = [];\nfor (var i in BedESP_lights) {\n    outputMsgs.push({payload: 0, topic: BedESP_lights[i]});\n}\nreturn [ outputMsgs ];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "1b2c0514.26b96b"
+            ]
+        ]
+    },
+    {
+        "id": "9a1fbcf0.ffe95",
+        "type": "inject",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "bd2fd613.839c38"
+            ]
+        ]
+    },
+    {
+        "id": "984a7faf.d9193",
+        "type": "ui_button",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "group": "384567f9.832db8",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "Off",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 250,
+        "y": 400,
+        "wires": [
+            [
+                "cec37981.aaa738"
+            ]
+        ]
+    },
+    {
+        "id": "26b39bd8.304804",
+        "type": "mqtt out",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "3cdd51b5.a678ee",
+        "x": 590,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cec37981.aaa738",
+        "type": "function",
+        "z": "d5b0d7ae.446838",
+        "name": "BedESP all lights off",
+        "func": "var SecondESP_lights = global.get(\"SecondESP_lights_topics\");\nvar outputMsgs = [];\nfor (var i in SecondESP_lights) {\n    outputMsgs.push({payload: 0, topic: SecondESP_lights[i]});\n}\nreturn [ outputMsgs ];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "26b39bd8.304804"
+            ]
+        ]
+    },
+    {
+        "id": "dc886688.bbb398",
+        "type": "inject",
+        "z": "d5b0d7ae.446838",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "984a7faf.d9193"
+            ]
+        ]
+    },
+    {
+        "id": "26a2ceaf.dfb662",
+        "type": "function",
+        "z": "78a7d496.dc3aec",
+        "name": "Topics_Init",
+        "func": "var BedESP_lights_topics = [\"home/floor1/myroom/bed_esp/light01\", \"home/floor1/myroom/bed_esp/light02\", \"home/floor1/myroom/bed_esp/light03\",\"home/floor1/myroom/bed_esp/light04\"];\nvar SecondESP_lights_topics = [\"home/floor1/myroom/second_esp/light01\", \"home/floor1/myroom/second_esp/light02\", \"home/floor1/myroom/second_esp/light03\",\"home/floor1/myroom/second_esp/light04\"];\nvar BedESP_switches_topics = [\"home/floor1/myroom/bed_esp/switch01\", \"home/floor1/myroom/bed_esp/switch02\", \"home/floor1/myroom/bed_esp/switch03\",\"home/floor1/myroom/bed_esp/switch04\"];\nvar SecondESP_switches_topics = [\"home/floor1/myroom/second_esp/switch01\", \"home/floor1/myroom/second_esp/switch02\", \"home/floor1/myroom/second_esp/switch03\",\"home/floor1/myroom/second_esp/switch04\"];\n \nglobal.set(\"BedESP_lights_topics\", BedESP_lights_topics);\nglobal.set(\"SecondESP_lights_topics\", SecondESP_lights_topics);\nglobal.set(\"BedESP_switches_topics\", BedESP_switches_topics);\nglobal.set(\"SecondESP_switches_topics\", SecondESP_switches_topics);\n\n/*\nvar BedESP_switches = [];\nvar SecondESP_switches = [];\n*/\n\n/*\nfor (var i = 0; i < 4; i++) {\n    BedESP_switches[i] = [];\n    SecondESP_switches[i] = [];\n    BedESP_switches[i][0] = BedESP_lights_topics[i];\n    SecondESP_switches[i][0] = SecondESP_lights_topics[i];\n    for (var j = 1; j < 4; j++) {\n        BedESP_switches[i][j] = \"\";\n        SecondESP_switches[i][j] = \"\";\n    }\n}\n*/\n\n/*\nglobal.set(\"BedESP_switches\", BedESP_switches);\nglobal.set(\"SecondESP_switches\", SecondESP_switches);\n*/\n\n/*\n// names of esps\nglobal.set(\"bed_esp_name\", \"ESP01\");\nglobal.set(\"second_esp_name\", \"ESP02\");\n*/\n\n/*\nvar default_switches = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]];\nglobal.set(\"BedESP_switches\", default_switches);\nglobal.set(\"SecondESP_switches\", default_switches);\n*/\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8952a8b.8fabc58",
+        "type": "subflow:52a1b662.72b058",
+        "z": "fd4ffe57.f6b16",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "afceccaa.a3d4a"
+            ]
+        ]
+    },
+    {
+        "id": "37febedd.0a4ea2",
+        "type": "subflow:7c4c545e.f0fb5c",
+        "z": "fd4ffe57.f6b16",
+        "x": 780,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1db4c09e.04b87f",
+        "type": "subflow:c687a720.430418",
+        "z": "fd4ffe57.f6b16",
+        "x": 770,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "afceccaa.a3d4a",
+        "type": "function",
+        "z": "fd4ffe57.f6b16",
+        "name": "pass if name change",
+        "func": "bed_esp_name = global.get(\"bed_esp_name\");\nsecond_esp_name = global.get(\"second_esp_name\");\n\nfunction control() {\n    if(bed_esp_name !== global.get(\"bed_esp_name\")) {\n        node.send({payload: \"bed_esp\"});\n        bed_esp_name = global.get(\"bed_esp_name\");\n        node.log(\"BED refresh\");\n    }\n    if(second_esp_name !== global.get(\"second_esp_name\")) {\n        node.send({payload: \"second_esp\"});\n        second_esp_name = global.get(\"second_esp_name\");\n        node.log(\"Second refresh\");\n    }\n}\n\nsetInterval(control, 1000);\n\nmsg.payload = \"all\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "eef26790.ae8f88",
+                "1db4c09e.04b87f",
+                "37febedd.0a4ea2"
+            ]
+        ]
+    },
+    {
+        "id": "eef26790.ae8f88",
         "type": "debug",
-        "z": "7c4c545e.f0fb5c",
+        "z": "fd4ffe57.f6b16",
         "name": "",
         "active": true,
         "console": "false",
-        "complete": "true",
-        "x": 530,
-        "y": 1280,
-        "wires": []
-    },
-    {
-        "id": "b428b7a8.97b2d8",
-        "type": "debug",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 1490,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "fd5bb701.82c1d8",
-        "type": "debug",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 890,
+        "complete": "false",
+        "x": 620,
         "y": 600,
-        "wires": []
-    },
-    {
-        "id": "67dbf090.38a33",
-        "type": "debug",
-        "z": "c687a720.430418",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 340,
-        "y": 380,
         "wires": []
     }
 ]
