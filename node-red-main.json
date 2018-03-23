@@ -1197,7 +1197,7 @@
         "func": "var new_table = global.get(\"BedESP_switches\");\nvar set_idx = parseInt(msg.topic);\nnew_table[0][set_idx] = msg.payload;\nglobal.set(\"BedESP_switches\", new_table);\nmsg.payload = new_table;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 920,
+        "x": 940,
         "y": 120,
         "wires": [
             [
@@ -2182,7 +2182,8 @@
         "y": 300,
         "wires": [
             [
-                "e7fb6be8.a16638"
+                "e7fb6be8.a16638",
+                "4bb2d94c.6fc418"
             ]
         ]
     },
@@ -2211,7 +2212,8 @@
         "y": 380,
         "wires": [
             [
-                "fc3fdee0.93ae1"
+                "fc3fdee0.93ae1",
+                "4bb2d94c.6fc418"
             ]
         ]
     },
@@ -2968,7 +2970,8 @@
         "y": 480,
         "wires": [
             [
-                "89685f71.f5521"
+                "89685f71.f5521",
+                "d539830c.455f4"
             ]
         ]
     },
@@ -2997,7 +3000,8 @@
         "y": 560,
         "wires": [
             [
-                "bb70ce76.8a3a9"
+                "bb70ce76.8a3a9",
+                "534dab28.44f4a4"
             ]
         ]
     },
@@ -3100,7 +3104,7 @@
         "type": "function",
         "z": "c687a720.430418",
         "name": "creates options for dropdown json",
-        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New BedESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
+        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += SecondESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New BedESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 300,
@@ -3378,7 +3382,7 @@
         "type": "function",
         "z": "7c4c545e.f0fb5c",
         "name": "creates options for dropdown json",
-        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New SecondESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
+        "func": "var BedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\n\nvar options = [];\noptions.push({\"None\": \"\"});\n\nvar option = \"\";\nvar bed_esp_name = global.get(\"bed_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += bed_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += BedESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n\nvar second_esp_name = global.get(\"second_esp_name\");\nfor (var i = 0; i < 4; i++) {\n    option = \"{\\\"\";\n    option += second_esp_name;\n    option += \" Light #\";\n    option += (i + 1).toString();\n    option += \"\\\": \\\"\";\n    option += SecondESP_topics[i];\n    option += \"\\\"}\";\n    //msg.payload = option;\n    options.push(JSON.parse(option));\n}\n// msg.payload = JSON.parse(option);\n\nnode.warn(\"New SecondESP dropdown created\");\n\nmsg.options = options;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 320,
@@ -3777,20 +3781,6 @@
         ]
     },
     {
-        "id": "d6d1ed30.069c8",
-        "type": "function",
-        "z": "c687a720.430418",
-        "name": "creates options for dropdown",
-        "func": "var BedESP_topics = [];\n// msg.payload = global.get(\"BedESP_lights_topics\").length;\nBedESP_topics = global.get(\"BedESP_lights_topics\");\nvar SecondESP_topics = global.get(\"SecondESP_lights_topics\");\nvar options = [];\nvar i = '1';\n\n/*\nfor (var j = 0; j < BedESP_topics.length; j++) {\n    var choice = {\"label\": \"BedESP Lihgt #\" + i, \"value\": BedESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n\ni = '1';\nfor (var j = 0; j < SecondESP_topics.length; j++) {\n    var Label = \"Second Lihgt #\" + i;\n    var choice = {Label: SecondESP_topics[j]};\n    options.push(choice);\n    i++;\n}\n*/\n\noptions.push({\"None\": \"\"});\noptions.push({\"BedESP Light #1\": BedESP_topics[0]});\noptions.push({\"BedESP Light #2\": BedESP_topics[1]});\noptions.push({\"BedESP Light #3\": BedESP_topics[2]});\noptions.push({\"BedESP Light #4\": BedESP_topics[3]});\noptions.push({\"SecondESP Light #1\": SecondESP_topics[0]});\noptions.push({\"SecondESP Light #2\": SecondESP_topics[1]});\noptions.push({\"SecondESP Light #3\": SecondESP_topics[2]});\noptions.push({\"SecondESP Light #4\": SecondESP_topics[3]});\n\nmsg.options = options;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 340,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "133a98af.887077",
         "type": "subflow:78a7d496.dc3aec",
         "z": "fd4ffe57.f6b16",
@@ -3996,6 +3986,7 @@
         "id": "37febedd.0a4ea2",
         "type": "subflow:7c4c545e.f0fb5c",
         "z": "fd4ffe57.f6b16",
+        "name": "",
         "x": 780,
         "y": 500,
         "wires": []
@@ -4004,6 +3995,7 @@
         "id": "1db4c09e.04b87f",
         "type": "subflow:c687a720.430418",
         "z": "fd4ffe57.f6b16",
+        "name": "",
         "x": 770,
         "y": 460,
         "wires": []
@@ -4020,22 +4012,45 @@
         "y": 480,
         "wires": [
             [
-                "eef26790.ae8f88",
                 "1db4c09e.04b87f",
                 "37febedd.0a4ea2"
             ]
         ]
     },
     {
-        "id": "eef26790.ae8f88",
+        "id": "4bb2d94c.6fc418",
         "type": "debug",
-        "z": "fd4ffe57.f6b16",
-        "name": "",
+        "z": "d5b0d7ae.446838",
+        "name": "switches",
         "active": true,
         "console": "false",
-        "complete": "false",
-        "x": 620,
-        "y": 600,
+        "complete": "true",
+        "x": 1224,
+        "y": 258,
+        "wires": []
+    },
+    {
+        "id": "d539830c.455f4",
+        "type": "debug",
+        "z": "c687a720.430418",
+        "name": "bed_esp table",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1362,
+        "y": 548,
+        "wires": []
+    },
+    {
+        "id": "534dab28.44f4a4",
+        "type": "debug",
+        "z": "7c4c545e.f0fb5c",
+        "name": "second_esp table",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1390,
+        "y": 480,
         "wires": []
     }
 ]
